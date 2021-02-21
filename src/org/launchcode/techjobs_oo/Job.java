@@ -1,5 +1,7 @@
 package org.launchcode.techjobs_oo;
 
+import java.util.*;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Job {
@@ -31,6 +33,37 @@ public class Job {
 
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
+
+    @Override
+    public String toString(){
+        Map<String,Object> jobsMap = new LinkedHashMap<String,Object>();
+        //jobsMap.put("ID",id);
+        jobsMap.put("\nName",name);
+        jobsMap.put("\nEmployer",employer);
+        jobsMap.put("\nLocation",location);
+        jobsMap.put("\nPosition Type",positionType);
+        jobsMap.put("\nCore Competency",coreCompetency);
+        String listString = "";
+        String printJobs = "";
+        String notAvailable= "Data not available";
+        String idString = "\n" +"ID: " + id  +"\n";
+        String printAll = "";
+
+
+        if(name == null && employer == null && location == null && positionType == null && coreCompetency == null){
+            return "OOPS! This job does not seem to exist.";
+        }
+        for (Map.Entry mapElement : jobsMap.entrySet()) {
+                String key = (String) mapElement.getKey();
+                Object value = mapElement.getValue();
+                if(value == ""){
+                    value.toString().replace("","Data not available");}
+                listString += (key + ": " + value);
+                printJobs = "\n" + "ID: " + id + listString + "\n";
+                printAll = printJobs.replace("null","Data not available");
+
+        } return printAll;
+    }
 
     @Override
     public boolean equals(Object o) {
