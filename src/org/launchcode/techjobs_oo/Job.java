@@ -36,33 +36,31 @@ public class Job {
 
     @Override
     public String toString(){
-        Map<String,Object> jobsMap = new LinkedHashMap<String,Object>();
-        //jobsMap.put("ID",id);
-        jobsMap.put("\nName",name);
-        jobsMap.put("\nEmployer",employer);
-        jobsMap.put("\nLocation",location);
-        jobsMap.put("\nPosition Type",positionType);
-        jobsMap.put("\nCore Competency",coreCompetency);
-        String listString = "";
         String printJobs = "";
-        String notAvailable= "Data not available";
-        String idString = "\n" +"ID: " + id  +"\n";
-        String printAll = "";
+        String printAll;
+       ArrayList<String> labels = new ArrayList<>();
+        labels.add("ID");
+        labels.add("Name");
+        labels.add("Employer");
+        labels.add("Location");
+        labels.add("Position Type");
+        labels.add("Core Competency");
+        ArrayList<Object> info = new ArrayList<>();
+        info.add(id);
+        info.add(name);
+        info.add(employer.toString());
+        info.add(location.toString());
+        info.add(positionType.toString());
+        info.add(coreCompetency.toString());
+        Collections.replaceAll(info,"","Data not available");
 
 
-        if(name == null && employer == null && location == null && positionType == null && coreCompetency == null){
-            return "OOPS! This job does not seem to exist.";
+        for(int i=0; i< labels.size();i++){
+            printJobs += ("\n" + labels.get(i) + ": " + info.get(i));
+
         }
-        for (Map.Entry mapElement : jobsMap.entrySet()) {
-                String key = (String) mapElement.getKey();
-                Object value = mapElement.getValue();
-                if(value == ""){
-                    value.toString().replace("","Data not available");}
-                listString += (key + ": " + value);
-                printJobs = "\n" + "ID: " + id + listString + "\n";
-                printAll = printJobs.replace("null","Data not available");
-
-        } return printAll;
+        printAll = printJobs + "\n";
+        return printAll;
     }
 
     @Override
